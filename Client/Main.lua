@@ -83,7 +83,20 @@ SpawnPed = function()
        PedEntity = ped
        SetBlockingOfNonTemporaryEvents(ped, true)
        PedVivo = true
-       
+       if rolar == "~g~" .. Config.Locales[Config.Locale]['yes']   and movimentar == "~g~" .. Config.Locales[Config.Locale]['yes']   then
+        Wait(1000)
+        __anim(ped)
+        elseif rolar == "~g~" .. Config.Locales[Config.Locale]['yes']   then
+          Wait(1000)
+          if randomizar == 1 then
+            anim(ped,'move_strafe@roll_fps','combatroll_bwd_p1_-135',8.0,-8.0)
+          else
+            anim(ped,'move_strafe@roll_fps','combatroll_bwd_p1_135',8.0,-8.0)
+          end
+        elseif movimentar == "~g~" .. Config.Locales[Config.Locale]['yes']   then
+          Wait(1000)
+          _anim(ped)
+        end
     end
   end)
 end
