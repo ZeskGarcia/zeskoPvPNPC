@@ -88,7 +88,7 @@ SpawnPed = function()
         __anim(ped)
         elseif rolar == "~g~" .. Config.Locales[Config.Locale]['yes']   then
           Wait(1000)
-          if randomizar == 1 then
+          if random == 1 then
             anim(ped,'move_strafe@roll_fps','combatroll_bwd_p1_-135',8.0,-8.0)
           else
             anim(ped,'move_strafe@roll_fps','combatroll_bwd_p1_135',8.0,-8.0)
@@ -99,4 +99,70 @@ SpawnPed = function()
         end
     end
   end)
+end
+
+function PedSpawnCoords()
+  return Config.spawn
+end
+
+function anim(ped,direct,name,v1,v2)
+  local anim = direct
+  RequestAnimDict(anim)
+  while not HasAnimDictLoaded(anim) do Wait(10) end
+  TaskPlayAnim(ped,anim,name,v1,v2,-1,0,0, false,false,false)
+  Wait(1500)
+  DeleteEntity(ped)
+end
+
+function _anim(ped)
+  local direcao = math.random(2)
+  if direcao == 1 then
+    SetEntityHeading(ped,60.0)
+  else
+    SetEntityHeading(ped,260.0)
+  end
+  local anim = 'anim@heists@narcotics@trash'
+  RequestAnimDict(anim)
+  while not HasAnimDictLoaded(anim) do Wait(10) end
+  TaskPlayAnim(ped,anim,'run',8.0,-8.0,-1,0,0, false,false,false)
+  Wait(1500)
+  DeleteEntity(ped)
+end
+
+function __anim(ped)
+  local direcao = math.random(2)
+  if direcao == 1 then
+    SetEntityHeading(ped,60.0)
+  else
+    SetEntityHeading(ped,260.0)
+  end
+  local anim = 'anim@heists@narcotics@trash'
+  RequestAnimDict(anim)
+  while not HasAnimDictLoaded(anim) do Wait(10) end
+  TaskPlayAnim(ped,anim,'run',8.0,-8.0,-1,0,0, false,false,false)
+  Wait(500)
+  local anim_ = 'move_strafe@roll_fps'
+  RequestAnimDict(anim_)
+  while not HasAnimDictLoaded(anim_) do Wait(10) end
+  local direcao2 = math.random(2)
+  if direcao2 == 1 then
+    TaskPlayAnim(ped,anim_,'combatroll_bwd_p1_135',8.0,-8.0,-1,0,0, false,false,false)
+  else
+    TaskPlayAnim(ped,anim_,'combatroll_bwd_p1_-135',8.0,-8.0,-1,0,0, false,false,false)
+  end
+  Wait(1500)
+  DeleteEntity(ped)
+end
+
+function text(x,y,z,font,e1,e2,r,g,b,a,texto)
+  local screen,xt,yt = GetScreenCoordFromWorldCoord(x,y,z)
+  if screen then
+    SetTextFont(font)
+    SetTextScale(e1,e2)
+    SetTextColour(r,g,b,a)
+    SetTextCentre(1)
+    SetTextEntry("STRING")
+    AddTextComponentString(texto)
+    DrawText(xt,yt)
+  end
 end
