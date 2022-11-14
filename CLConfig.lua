@@ -35,3 +35,6 @@ Config.spawn = {
   vector3(50.75, -858.9, 30.67),
   vector3(41.98, -857.23, 30.66)
 }
+
+Config.NPC = "g_m_y_famdnf_01"
+Config.NPCHash = 0xDB729238
